@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Page, TaskForm, TaskItem, TaskList } from "src/components";
+import { Page, TaskForm, TaskList } from "src/components";
 
 export function Home() {
   return (
@@ -16,15 +16,6 @@ export function Home() {
         <Link to="/about">About this app</Link>
       </p>
       <TaskForm mode="create" />
-      {/* <TaskItem
-        task={{
-          _id: "foo123",
-          title: "My title",
-          description: "My description",
-          isChecked: true,
-          dateCreated: new Date(),
-        }}
-      /> */}
       <TaskList title={"All tasks"} />
     </Page>
   );
