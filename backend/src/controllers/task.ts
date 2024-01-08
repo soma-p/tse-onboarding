@@ -70,6 +70,35 @@ export const createTask: RequestHandler = async (req, res, next) => {
   }
 };
 
+export const updateTask: RequestHandler = async (req, res, next) => {
+  // your code here
+  const errors = validationResult(req);
+  const request = req.params.id;
+
+  try {
+    // your code here
+    validationErrorParser(errors);
+    if (request != req.body._id) {
+      res.status(400);
+    } else {
+      const query = await TaskModel.findByIdAndUpdate(request, req.body);
+
+      if (query === null) {
+        res.status(404);
+      }
+
+      const task = await TaskModel.findById(request);
+      if (task === null) {
+        throw createHttpError(404, "Task not found.");
+      }
+
+      res.status(200).json(task);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const removeTask: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
 
